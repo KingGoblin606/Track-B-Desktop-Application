@@ -68,7 +68,15 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
             new String [] {
                 "ID", "Name", "Surname", "Department"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         scrollPanel_Cleaners.setViewportView(tblCleaners);
         tblCleaners.getAccessibleContext().setAccessibleName("tblMaterial");
 

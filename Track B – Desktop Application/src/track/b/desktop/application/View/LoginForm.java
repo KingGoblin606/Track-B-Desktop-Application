@@ -35,7 +35,7 @@ public class LoginForm extends javax.swing.JFrame {
         textEmail = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
-        lblTitel = new javax.swing.JLabel();
+        lblLoginTitel = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -55,9 +55,8 @@ public class LoginForm extends javax.swing.JFrame {
 
         btnRegister.setText("REGISTER");
 
-        lblTitel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        lblTitel.setText("WELCOME");
-        lblTitel.setBorder(javax.swing.BorderFactory.createMatteBorder(, null));
+        lblLoginTitel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblLoginTitel.setText("WELCOME");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,13 +74,13 @@ public class LoginForm extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jPasswordField1)
                         .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblTitel))
+                    .addComponent(lblLoginTitel))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblLoginTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -96,7 +95,7 @@ public class LoginForm extends javax.swing.JFrame {
         jPasswordField1.getAccessibleContext().setAccessibleName("passEmailPassword");
         textEmail.getAccessibleContext().setAccessibleName("TxtEmail");
         btnRegister.getAccessibleContext().setAccessibleName("btnRegister");
-        lblTitel.getAccessibleContext().setAccessibleName("lblLoginTitle");
+        lblLoginTitel.getAccessibleContext().setAccessibleName("lblLoginTitle");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,7 +132,7 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel lblTitel;
+    private javax.swing.JLabel lblLoginTitel;
     private javax.swing.JTextField textEmail;
     // End of variables declaration//GEN-END:variables
 }

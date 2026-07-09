@@ -28,21 +28,23 @@ public class SuppliersForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPanel_Cleaners = new javax.swing.JScrollPane();
-        tblCleaners = new javax.swing.JTable();
+        scrollPanel_Suppliers = new javax.swing.JScrollPane();
+        tblSuppliers = new javax.swing.JTable();
         lbl_TableName = new javax.swing.JLabel();
         lblTitel = new javax.swing.JLabel();
-        lblNames = new javax.swing.JLabel();
-        lblSurname = new javax.swing.JLabel();
-        lblDepartment = new javax.swing.JLabel();
+        lblCompanyName = new javax.swing.JLabel();
+        lblNameOfContact = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        textNames = new javax.swing.JTextField();
+        textCompanyName = new javax.swing.JTextField();
         textSurname = new javax.swing.JTextField();
-        textDepartment = new javax.swing.JTextField();
-        MenuBar_Cleaners = new javax.swing.JMenuBar();
+        textSupplierEmail = new javax.swing.JTextField();
+        lblCellNumber = new javax.swing.JLabel();
+        textCellNumber = new javax.swing.JTextField();
+        MenuBar_Suppliers = new javax.swing.JMenuBar();
         Mbar_Dashboard = new javax.swing.JMenu();
         Mbar_Cleaners = new javax.swing.JMenu();
         Mbar_Material = new javax.swing.JMenu();
@@ -51,37 +53,45 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblCleaners.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tblCleaners.setModel(new javax.swing.table.DefaultTableModel(
+        tblSuppliers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblSuppliers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Surname", "Department"
+                "ID", "Company Name", "Name of Contact", "Email", "Cell Number"
             }
-        ));
-        scrollPanel_Cleaners.setViewportView(tblCleaners);
-        tblCleaners.getAccessibleContext().setAccessibleName("tblMaterial");
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        scrollPanel_Suppliers.setViewportView(tblSuppliers);
+        tblSuppliers.getAccessibleContext().setAccessibleName("tblMaterial");
 
         lbl_TableName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_TableName.setText("Cleaners Table");
+        lbl_TableName.setText("Suppliers Table");
 
         lblTitel.setText("Cleaner Details:");
 
-        lblNames.setText("Names:");
+        lblCompanyName.setText("Company Name:");
 
-        lblSurname.setText("Surname:");
+        lblNameOfContact.setText("Name Of Contact:");
 
-        lblDepartment.setText("Deparntment:");
+        lblEmail.setText("Email:");
 
         btnUpdate.setText("Update");
 
@@ -93,31 +103,35 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         textSurname.addActionListener(this::textSurnameActionPerformed);
 
-        textDepartment.addActionListener(this::textDepartmentActionPerformed);
+        textSupplierEmail.addActionListener(this::textSupplierEmailActionPerformed);
+
+        lblCellNumber.setText("Cell Number:");
+
+        textCellNumber.addActionListener(this::textCellNumberActionPerformed);
 
         Mbar_Dashboard.setText("Dashboard");
-        MenuBar_Cleaners.add(Mbar_Dashboard);
+        MenuBar_Suppliers.add(Mbar_Dashboard);
 
         Mbar_Cleaners.setText("Cleaners");
-        MenuBar_Cleaners.add(Mbar_Cleaners);
+        MenuBar_Suppliers.add(Mbar_Cleaners);
 
         Mbar_Material.setText("Materials");
-        MenuBar_Cleaners.add(Mbar_Material);
+        MenuBar_Suppliers.add(Mbar_Material);
 
         Mbar_Reports.setText("Reports");
-        MenuBar_Cleaners.add(Mbar_Reports);
+        MenuBar_Suppliers.add(Mbar_Reports);
 
         Mbar_Logout.setText("Logout");
-        MenuBar_Cleaners.add(Mbar_Logout);
+        MenuBar_Suppliers.add(Mbar_Logout);
 
-        setJMenuBar(MenuBar_Cleaners);
+        setJMenuBar(MenuBar_Suppliers);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(scrollPanel_Cleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPanel_Suppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,24 +143,27 @@ public class SuppliersForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitel)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnUpdate)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnSearch)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnClear)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDelete))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblDepartment, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblSurname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(lblNames))
+                                        .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblNameOfContact, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblCompanyName)
+                                    .addComponent(lblCellNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textNames, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textCellNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(textSupplierEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClear)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -155,40 +172,48 @@ public class SuppliersForm extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lbl_TableName)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPanel_Cleaners, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPanel_Suppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lblTitel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNames)
-                    .addComponent(textNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCompanyName)
+                    .addComponent(textCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSurname)
+                    .addComponent(lblNameOfContact)
                     .addComponent(textSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDepartment)
-                    .addComponent(textDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblEmail)
+                    .addComponent(textSupplierEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCellNumber)
+                    .addComponent(textCellNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
                     .addComponent(btnSearch)
                     .addComponent(btnClear)
                     .addComponent(btnDelete))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDepartmentActionPerformed
+    private void textSupplierEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSupplierEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textDepartmentActionPerformed
+    }//GEN-LAST:event_textSupplierEmailActionPerformed
 
     private void textSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSurnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textSurnameActionPerformed
+
+    private void textCellNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCellNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textCellNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,20 +246,22 @@ public class SuppliersForm extends javax.swing.JFrame {
     private javax.swing.JMenu Mbar_Logout;
     private javax.swing.JMenu Mbar_Material;
     private javax.swing.JMenu Mbar_Reports;
-    private javax.swing.JMenuBar MenuBar_Cleaners;
+    private javax.swing.JMenuBar MenuBar_Suppliers;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JLabel lblDepartment;
-    private javax.swing.JLabel lblNames;
-    private javax.swing.JLabel lblSurname;
+    private javax.swing.JLabel lblCellNumber;
+    private javax.swing.JLabel lblCompanyName;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblNameOfContact;
     private javax.swing.JLabel lblTitel;
     private javax.swing.JLabel lbl_TableName;
-    private javax.swing.JScrollPane scrollPanel_Cleaners;
-    private javax.swing.JTable tblCleaners;
-    private javax.swing.JTextField textDepartment;
-    private javax.swing.JTextField textNames;
+    private javax.swing.JScrollPane scrollPanel_Suppliers;
+    private javax.swing.JTable tblSuppliers;
+    private javax.swing.JTextField textCellNumber;
+    private javax.swing.JTextField textCompanyName;
+    private javax.swing.JTextField textSupplierEmail;
     private javax.swing.JTextField textSurname;
     // End of variables declaration//GEN-END:variables
 }
