@@ -62,6 +62,18 @@ public class DBInitializer {
                            Quantity INT NOT NULL,
                            ReorderLevel INT NOT NULL,
                            Cost INT NOT NULL
+                           )
+                           """);
+    }
+    
+    private static void createDepartmentTable(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        
+        stmt.executeUpdate("""
+                           CREATE TABLE Department (
+                           DepartmentID INT PRIMARY KEY,
+                           DeparementName VARCHAR(50)
+                           )
                            """);
     }
 }
