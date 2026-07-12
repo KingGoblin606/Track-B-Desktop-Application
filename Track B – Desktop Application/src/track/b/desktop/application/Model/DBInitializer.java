@@ -11,6 +11,14 @@ public class DBInitializer {
         try (DBConnection db = new DBConnection()) {
             Connection conn = db.getConnection();
             
+            createUserTable(conn);
+            createSuppliersTable(conn);
+            createMaterialTable(conn);
+            createDepartmentTable(conn);
+            createCleanerTable(conn);
+            createCleanerDepartmentTable(conn);
+            createStockIssuance(conn);
+            
             
         } catch (SQLException e) {
             if(!"X0Y32".equals(e.getSQLState())) {
