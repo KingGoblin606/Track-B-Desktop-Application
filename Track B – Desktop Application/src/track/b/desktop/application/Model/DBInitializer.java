@@ -103,11 +103,27 @@ public class DBInitializer {
                            
                            PRIMARY KEY (DepartmentID, CleanerID),
                            
-                           FOREIGN KEY (DepartmentID) REFERENCE Department(DepartmentID)
+                           FOREIGN KEY (DepartmentID) REFERENCE Department(DepartmentID),
                            FOREIGN KEY (CleanerID) REFERENCE Cleaner(CleanerID)
                            )
                            """);
     }
     
-    
+    private static void createStockIssuance(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        
+        stmt.executeUpdate("""
+                           CREATE TABLE StockIssueance (
+                           IssueID INT PRIMARY KEY,
+                           MaterialsID INT NOT NULL,
+                           CleanerID INT NOT NULL,
+                           UserID INT NOT NULL,
+                           Quantity INT NOT NULL,
+                           DateIssued DATE,                           
+                           FOREIGN KEY (MaterialsID) REFERENCE Materials(MaterialsID),
+                           FOREIGN KEY (CleanerID) REFERENCE Cleaner(CleanerID),
+                           FOREIGN KEY (UserID) REFERENCE User(UserID)
+                           )
+                           """);
+    }
 }
