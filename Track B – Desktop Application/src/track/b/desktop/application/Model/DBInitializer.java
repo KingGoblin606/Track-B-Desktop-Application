@@ -42,7 +42,7 @@ public class DBInitializer {
                            SupplierID int PRIMARY KEY,
                            SupplierName VARCHAR(50) NOT NULL,
                            ContactPerson VARCHAR(50) NOT NULL,
-                           PhoneNumber VARCHAR(20) NOT NULL,
+                           SupplierPhoneNumber VARCHAR(20) NOT NULL,
                            SupplierEmail VARCHAR(100) NOT NULL UNIQUE,
                            StreetAddress VARCHAR(100) NOT NULL,
                            City VARCHAR(50) NOT NULL,
@@ -73,6 +73,20 @@ public class DBInitializer {
                            CREATE TABLE Department (
                            DepartmentID INT PRIMARY KEY,
                            DeparementName VARCHAR(50)
+                           )
+                           """);
+    }
+    
+    private static void createCleanerTable(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        
+        stmt.executeUpdate("""
+                           CREATE TABLE Cleaner (
+                           CleanerID INT PRIMARY KEY,
+                           CleanerName VARCHAR(50) NOT NULL,
+                           CleanerSurname VARCHAR(50) NOT NULL,
+                           CleanerPhoneNumber VARCHAR(20) NOT NULL,
+                           CleanerEmail VARCHAR(100) NOT NULL UNIQUE
                            )
                            """);
     }
