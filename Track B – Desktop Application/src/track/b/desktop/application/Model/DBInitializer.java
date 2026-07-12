@@ -57,11 +57,13 @@ public class DBInitializer {
         stmt.executeUpdate("""
                            CREATE TABLE Materials (
                            MaterialsID INT PRIMARY KEY,
-                           FOREIGN KRY (SupplierID) REFERENCES Supplier(SupplierID),
+                           SupplierID INT NOT NULL,
                            MaterialName VARCHAR(50) NOT NULL,
                            Quantity INT NOT NULL,
                            ReorderLevel INT NOT NULL,
-                           Cost INT NOT NULL
+                           Cost INT NOT NULL,
+                           FOREIGN KRY (SupplierID) REFERENCES Supplier(SupplierID),
+                           
                            )
                            """);
     }
@@ -72,7 +74,7 @@ public class DBInitializer {
         stmt.executeUpdate("""
                            CREATE TABLE Department (
                            DepartmentID INT PRIMARY KEY,
-                           DeparementName VARCHAR(50)
+                           DepartmentName VARCHAR(50)
                            )
                            """);
     }
@@ -90,4 +92,22 @@ public class DBInitializer {
                            )
                            """);
     }
+    
+    private static void createCleanerDepartmentTable(Connection conn) throws SQLException{
+        Statement stmt = conn.createStatement();
+        
+        stmt.executeUpdate("""
+                           CREATE TABLE CleanerDepartment (
+                           DepartmentID INT NOT NULL,
+                           CleanerID INT NOT NULL,
+                           
+                           PRIMARY KEY (DepartmentID, CleanerID),
+                           
+                           FOREIGN KEY (DepartmentID) REFERENCE Department(DepartmentID)
+                           FOREIGN KEY (CleanerID) REFERENCE Cleaner(CleanerID)
+                           )
+                           """);
+    }
+    
+    
 }
