@@ -49,6 +49,8 @@ public class SuppliersForm extends javax.swing.JFrame {
         Mbar_Cleaners = new javax.swing.JMenu();
         Mbar_Material = new javax.swing.JMenu();
         Mbar_Reports = new javax.swing.JMenu();
+        Mbar_suppliers = new javax.swing.JMenu();
+        Mbar_Register = new javax.swing.JMenu();
         Mbar_Logout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,6 +122,13 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         Mbar_Reports.setText("Reports");
         MenuBar_Suppliers.add(Mbar_Reports);
+
+        Mbar_suppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        Mbar_suppliers.setText("Suppliers");
+        MenuBar_Suppliers.add(Mbar_suppliers);
+
+        Mbar_Register.setText("Add New User");
+        MenuBar_Suppliers.add(Mbar_Register);
 
         Mbar_Logout.setText("Logout");
         MenuBar_Suppliers.add(Mbar_Logout);
@@ -245,7 +254,9 @@ public class SuppliersForm extends javax.swing.JFrame {
     private javax.swing.JMenu Mbar_Dashboard;
     private javax.swing.JMenu Mbar_Logout;
     private javax.swing.JMenu Mbar_Material;
+    private javax.swing.JMenu Mbar_Register;
     private javax.swing.JMenu Mbar_Reports;
+    private javax.swing.JMenu Mbar_suppliers;
     private javax.swing.JMenuBar MenuBar_Suppliers;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;

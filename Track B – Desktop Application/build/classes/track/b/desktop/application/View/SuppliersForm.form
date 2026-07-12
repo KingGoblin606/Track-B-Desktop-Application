@@ -24,6 +24,21 @@
             <Property name="text" type="java.lang.String" value="Reports"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="Mbar_suppliers">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder bevelType="1"/>
+              </Border>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Suppliers"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="Mbar_Register">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Add New User"/>
+          </Properties>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="Mbar_Logout">
           <Properties>
             <Property name="text" type="java.lang.String" value="Logout"/>

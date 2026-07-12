@@ -47,6 +47,8 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
         Mbar_Cleaners = new javax.swing.JMenu();
         Mbar_Material = new javax.swing.JMenu();
         Mbar_Reports = new javax.swing.JMenu();
+        Mbar_suppliers = new javax.swing.JMenu();
+        Mbar_Register = new javax.swing.JMenu();
         Mbar_Logout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,6 +108,7 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
         Mbar_Dashboard.setText("Dashboard");
         MenuBar_Cleaners.add(Mbar_Dashboard);
 
+        Mbar_Cleaners.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         Mbar_Cleaners.setText("Cleaners");
         MenuBar_Cleaners.add(Mbar_Cleaners);
 
@@ -114,6 +117,12 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
 
         Mbar_Reports.setText("Reports");
         MenuBar_Cleaners.add(Mbar_Reports);
+
+        Mbar_suppliers.setText("Suppliers");
+        MenuBar_Cleaners.add(Mbar_suppliers);
+
+        Mbar_Register.setText("Add New User");
+        MenuBar_Cleaners.add(Mbar_Register);
 
         Mbar_Logout.setText("Logout");
         MenuBar_Cleaners.add(Mbar_Logout);
@@ -228,7 +237,9 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
     private javax.swing.JMenu Mbar_Dashboard;
     private javax.swing.JMenu Mbar_Logout;
     private javax.swing.JMenu Mbar_Material;
+    private javax.swing.JMenu Mbar_Register;
     private javax.swing.JMenu Mbar_Reports;
+    private javax.swing.JMenu Mbar_suppliers;
     private javax.swing.JMenuBar MenuBar_Cleaners;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;

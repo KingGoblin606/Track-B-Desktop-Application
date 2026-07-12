@@ -28,6 +28,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        textReorderlvl = new javax.swing.JTextField();
         scrollPanel_Material = new javax.swing.JScrollPane();
         tblMaterial = new javax.swing.JTable();
         lbl_TableName = new javax.swing.JLabel();
@@ -46,14 +47,18 @@ public class MaterialManagementForm extends javax.swing.JFrame {
         textNames = new javax.swing.JTextField();
         textCategory = new javax.swing.JTextField();
         textQuantity = new javax.swing.JTextField();
-        textReorderlvl = new javax.swing.JTextField();
         textSupplier = new javax.swing.JTextField();
+        spinnerReorderLvl = new javax.swing.JSpinner();
         MenuBar_Material = new javax.swing.JMenuBar();
         Mbar_Dashboard = new javax.swing.JMenu();
         Mbar_Cleaners = new javax.swing.JMenu();
         Mbar_Material = new javax.swing.JMenu();
         Mbar_Reports = new javax.swing.JMenu();
+        Mbar_suppliers = new javax.swing.JMenu();
+        Mbar_Register = new javax.swing.JMenu();
         Mbar_Logout = new javax.swing.JMenu();
+
+        textReorderlvl.addActionListener(this::textReorderlvlActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,19 +123,24 @@ public class MaterialManagementForm extends javax.swing.JFrame {
 
         textQuantity.addActionListener(this::textQuantityActionPerformed);
 
-        textReorderlvl.addActionListener(this::textReorderlvlActionPerformed);
-
         Mbar_Dashboard.setText("Dashboard");
         MenuBar_Material.add(Mbar_Dashboard);
 
         Mbar_Cleaners.setText("Cleaners");
         MenuBar_Material.add(Mbar_Cleaners);
 
-        Mbar_Material.setText("Materials");
+        Mbar_Material.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        Mbar_Material.setText("Materials ");
         MenuBar_Material.add(Mbar_Material);
 
-        Mbar_Reports.setText("Reports");
+        Mbar_Reports.setText(" Reports ");
         MenuBar_Material.add(Mbar_Reports);
+
+        Mbar_suppliers.setText("Suppliers");
+        MenuBar_Material.add(Mbar_suppliers);
+
+        Mbar_Register.setText("Add New User");
+        MenuBar_Material.add(Mbar_Register);
 
         Mbar_Logout.setText("Logout");
         MenuBar_Material.add(Mbar_Logout);
@@ -176,12 +186,12 @@ public class MaterialManagementForm extends javax.swing.JFrame {
                                         .addComponent(lblReorder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(lblNames))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textNames, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textReorderlvl, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textNames, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(textCategory, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(textQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(textSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(spinnerReorderLvl))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -212,7 +222,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblReorder)
-                    .addComponent(textReorderlvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerReorderLvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSupplier)
@@ -278,7 +288,9 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     private javax.swing.JMenu Mbar_Dashboard;
     private javax.swing.JMenu Mbar_Logout;
     private javax.swing.JMenu Mbar_Material;
+    private javax.swing.JMenu Mbar_Register;
     private javax.swing.JMenu Mbar_Reports;
+    private javax.swing.JMenu Mbar_suppliers;
     private javax.swing.JMenuBar MenuBar_Material;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
@@ -294,6 +306,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_Filter;
     private javax.swing.JLabel lbl_TableName;
     private javax.swing.JScrollPane scrollPanel_Material;
+    private javax.swing.JSpinner spinnerReorderLvl;
     private javax.swing.JTable tblMaterial;
     private javax.swing.JTextField textCategory;
     private javax.swing.JTextField textNames;

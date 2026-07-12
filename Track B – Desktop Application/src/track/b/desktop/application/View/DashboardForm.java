@@ -28,17 +28,50 @@ public class DashboardForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuBar_Cleaners = new javax.swing.JMenuBar();
+        Mbar_Dashboard = new javax.swing.JMenu();
+        Mbar_Cleaners = new javax.swing.JMenu();
+        Mbar_Material = new javax.swing.JMenu();
+        Mbar_Reports = new javax.swing.JMenu();
+        Mbar_suppliers = new javax.swing.JMenu();
+        Mbar_Register = new javax.swing.JMenu();
+        Mbar_Logout = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Mbar_Dashboard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        Mbar_Dashboard.setText("Dashboard");
+        MenuBar_Cleaners.add(Mbar_Dashboard);
+
+        Mbar_Cleaners.setText("Cleaners");
+        MenuBar_Cleaners.add(Mbar_Cleaners);
+
+        Mbar_Material.setText("Materials");
+        MenuBar_Cleaners.add(Mbar_Material);
+
+        Mbar_Reports.setText("Reports");
+        MenuBar_Cleaners.add(Mbar_Reports);
+
+        Mbar_suppliers.setText("Suppliers");
+        MenuBar_Cleaners.add(Mbar_suppliers);
+
+        Mbar_Register.setText("Add New User");
+        MenuBar_Cleaners.add(Mbar_Register);
+
+        Mbar_Logout.setText("Logout");
+        MenuBar_Cleaners.add(Mbar_Logout);
+
+        setJMenuBar(MenuBar_Cleaners);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 540, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
         pack();
@@ -70,5 +103,13 @@ public class DashboardForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Mbar_Cleaners;
+    private javax.swing.JMenu Mbar_Dashboard;
+    private javax.swing.JMenu Mbar_Logout;
+    private javax.swing.JMenu Mbar_Material;
+    private javax.swing.JMenu Mbar_Register;
+    private javax.swing.JMenu Mbar_Reports;
+    private javax.swing.JMenu Mbar_suppliers;
+    private javax.swing.JMenuBar MenuBar_Cleaners;
     // End of variables declaration//GEN-END:variables
 }
