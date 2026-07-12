@@ -18,4 +18,19 @@ public class DBInitializer {
             }
         }
     }
+    
+    private static void createUserTable(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        
+        stmt.executeUpdate("""
+                           CREATE TABLE User (
+                           UserID INT PRIMARY KEY,
+                           UserName VARCHAR(50) NOT NULL,
+                           UserPassword VARCHAR(255) NOT NULL,
+                           UserEmail VARCHAR(100) NOT NULL UNIQUE,
+                           UserRole VARCHAR(10) NOT NULL
+                                CHECK (UserRole IN ('User', 'Admin'))
+                           )
+                           """);
+    }
 }
