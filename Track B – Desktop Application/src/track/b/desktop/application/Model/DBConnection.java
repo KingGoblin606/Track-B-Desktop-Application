@@ -8,7 +8,7 @@ public class DBConnection implements AutoCloseable {//handles db connection
 
     //connection string
     private static final String JDBC_URL = "jdbc:derby:ResourceManagementDB;create=true";
-    private Connection con;
+    private final Connection con;
     
     public DBConnection() throws SQLException {//opens connection
         con = DriverManager.getConnection(JDBC_URL);
