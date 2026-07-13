@@ -1,4 +1,3 @@
-
 package track.b.desktop.application.Model;
 
 import java.sql.Connection;
@@ -31,7 +30,7 @@ public class DBInitializer {
         Statement stmt = conn.createStatement();
         
         stmt.executeUpdate("""
-                           CREATE TABLE User (
+                           CREATE TABLE Users (
                            UserID INT PRIMARY KEY,
                            UserName VARCHAR(50) NOT NULL,
                            UserPassword VARCHAR(255) NOT NULL,
@@ -70,8 +69,8 @@ public class DBInitializer {
                            Quantity INT NOT NULL,
                            ReorderLevel INT NOT NULL,
                            Cost INT NOT NULL,
-                           FOREIGN KRY (SupplierID) REFERENCES Supplier(SupplierID),
-                           
+                           Category VARCHAR(50) NOT NULL,
+                           FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
                            )
                            """);
     }
@@ -111,8 +110,8 @@ public class DBInitializer {
                            
                            PRIMARY KEY (DepartmentID, CleanerID),
                            
-                           FOREIGN KEY (DepartmentID) REFERENCE Department(DepartmentID),
-                           FOREIGN KEY (CleanerID) REFERENCE Cleaner(CleanerID)
+                           FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
+                           FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID)
                            )
                            """);
     }
@@ -121,16 +120,16 @@ public class DBInitializer {
         Statement stmt = conn.createStatement();
         
         stmt.executeUpdate("""
-                           CREATE TABLE StockIssueance (
+                           CREATE TABLE StockIssuance (
                            IssueID INT PRIMARY KEY,
                            MaterialsID INT NOT NULL,
                            CleanerID INT NOT NULL,
                            UserID INT NOT NULL,
                            Quantity INT NOT NULL,
                            DateIssued DATE,                           
-                           FOREIGN KEY (MaterialsID) REFERENCE Materials(MaterialsID),
-                           FOREIGN KEY (CleanerID) REFERENCE Cleaner(CleanerID),
-                           FOREIGN KEY (UserID) REFERENCE User(UserID)
+                           FOREIGN KEY (MaterialsID) REFERENCES Materials(MaterialsID),
+                           FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID),
+                           FOREIGN KEY (UserID) REFERENCES Users(UserID)
                            )
                            """);
     }

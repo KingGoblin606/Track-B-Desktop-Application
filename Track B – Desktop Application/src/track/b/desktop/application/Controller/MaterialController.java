@@ -1,28 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package track.b.desktop.application.Controller;
 
-import track.b.desktop.application.Data.MaterialFileRepository;
+import track.b.desktop.application.Data.MaterialRepository;
 import track.b.desktop.application.Model.Material;
 
 import java.util.ArrayList;
 
 public class MaterialController {
 
-    private final ArrayList<Material> materials;
-    private final MaterialFileRepository repository;
+    private final MaterialRepository repository;
 
     public MaterialController() {
-        repository = new MaterialFileRepository();
-        materials = repository.loadMaterials();
+        repository = new MaterialRepository();
     }
 
     // Returns all materials
     public ArrayList<Material> getAllMaterials() {
-        return new ArrayList<>(materials);
+        return repository.findAll();
     }
 
     // Adds a new material
@@ -31,17 +24,18 @@ public class MaterialController {
             String category,
             int quantity,
             int reorderLevel,
-            String supplier) {
+            int cost,
+            int supplierId) {
 
         validateMaterialDetails(
                 name,
                 category,
                 quantity,
                 reorderLevel,
-                supplier
+                cost
         );
 
-        int newId = generateNextId();
+        int newId = repository.findMaxId() + 1;
 
         Material material = new Material(
                 newId,
@@ -49,11 +43,11 @@ public class MaterialController {
                 category.trim(),
                 quantity,
                 reorderLevel,
-                supplier.trim()
+                cost,
+                supplierId
         );
 
-        materials.add(material);
-        saveMaterials();
+        repository.insert(material);
 
         return material;
     }
@@ -65,14 +59,15 @@ public class MaterialController {
             String category,
             int quantity,
             int reorderLevel,
-            String supplier) {
+            int cost,
+            int supplierId) {
 
         validateMaterialDetails(
                 name,
                 category,
                 quantity,
                 reorderLevel,
-                supplier
+                cost
         );
 
         Material material = findMaterialById(materialId);
@@ -85,9 +80,10 @@ public class MaterialController {
         material.setCategory(category.trim());
         material.setQuantity(quantity);
         material.setReorderLevel(reorderLevel);
-        material.setSupplier(supplier.trim());
+        material.setCost(cost);
+        material.setSupplierId(supplierId);
 
-        saveMaterials();
+        repository.update(material);
 
         return true;
     }
@@ -101,8 +97,7 @@ public class MaterialController {
             return false;
         }
 
-        materials.remove(material);
-        saveMaterials();
+        repository.delete(materialId);
 
         return true;
     }
@@ -110,7 +105,7 @@ public class MaterialController {
     // Finds one material by its ID
     public Material findMaterialById(int materialId) {
 
-        for (Material material : materials) {
+        for (Material material : getAllMaterials()) {
 
             if (material.getMaterialId() == materialId) {
                 return material;
@@ -120,7 +115,7 @@ public class MaterialController {
         return null;
     }
 
-    // Searches by ID, name, category or supplier
+    // Searches by ID, name, category or supplier name
     public ArrayList<Material> searchMaterials(String searchText) {
 
         ArrayList<Material> searchResults = new ArrayList<>();
@@ -131,7 +126,7 @@ public class MaterialController {
 
         String searchValue = searchText.trim().toLowerCase();
 
-        for (Material material : materials) {
+        for (Material material : getAllMaterials()) {
 
             boolean idMatches =
                     String.valueOf(material.getMaterialId())
@@ -148,9 +143,10 @@ public class MaterialController {
                             .contains(searchValue);
 
             boolean supplierMatches =
-                    material.getSupplier()
-                            .toLowerCase()
-                            .contains(searchValue);
+                    material.getSupplierName() != null
+                            && material.getSupplierName()
+                                    .toLowerCase()
+                                    .contains(searchValue);
 
             if (idMatches
                     || nameMatches
@@ -176,7 +172,7 @@ public class MaterialController {
             return getAllMaterials();
         }
 
-        for (Material material : materials) {
+        for (Material material : getAllMaterials()) {
 
             if (filter.equalsIgnoreCase("Low Stock")
                     && material.isLowStock()
@@ -209,7 +205,7 @@ public class MaterialController {
         }
 
         material.increaseStock(amount);
-        saveMaterials();
+        repository.update(material);
 
         return true;
     }
@@ -224,29 +220,9 @@ public class MaterialController {
         }
 
         material.decreaseStock(amount);
-        saveMaterials();
+        repository.update(material);
 
         return true;
-    }
-
-    // Generates the next available material ID
-    private int generateNextId() {
-
-        int highestId = 0;
-
-        for (Material material : materials) {
-
-            if (material.getMaterialId() > highestId) {
-                highestId = material.getMaterialId();
-            }
-        }
-
-        return highestId + 1;
-    }
-
-    // Saves the current list using the repository
-    private void saveMaterials() {
-        repository.saveMaterials(materials);
     }
 
     // Validates all input before creating or updating a material
@@ -255,7 +231,7 @@ public class MaterialController {
             String category,
             int quantity,
             int reorderLevel,
-            String supplier) {
+            int cost) {
 
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException(
@@ -281,9 +257,9 @@ public class MaterialController {
             );
         }
 
-        if (supplier == null || supplier.trim().isEmpty()) {
+        if (cost < 0) {
             throw new IllegalArgumentException(
-                    "Supplier cannot be empty."
+                    "Cost cannot be negative."
             );
         }
     }

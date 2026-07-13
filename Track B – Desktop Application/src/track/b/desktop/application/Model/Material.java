@@ -8,7 +8,9 @@ public class Material {
     private String category;
     private int quantity;
     private int reorderLevel;
-    private String supplier;
+    private int cost;
+    private int supplierId;
+    private String supplierName;
 
     // Empty constructor
     public Material() {
@@ -21,14 +23,16 @@ public class Material {
             String category,
             int quantity,
             int reorderLevel,
-            String supplier) {
+            int cost,
+            int supplierId) {
 
         this.materialId = materialId;
         this.name = name;
         this.category = category;
         this.quantity = quantity;
         this.reorderLevel = reorderLevel;
-        this.supplier = supplier;
+        this.cost = cost;
+        this.supplierId = supplierId;
     }
 
     // Getters
@@ -52,9 +56,17 @@ public class Material {
     public int getReorderLevel() {
         return reorderLevel;
     }
+    
+    public int getCost() {
+        return cost;
+    }
 
-    public String getSupplier() {
-        return supplier;
+    public int getSupplierId() {
+        return supplierId;
+    }
+    
+    public String getSupplierName() {
+        return supplierName;
     }
 
     // Setters
@@ -78,9 +90,17 @@ public class Material {
     public void setReorderLevel(int reorderLevel) {
         this.reorderLevel = reorderLevel;
     }
+    
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
 
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
+    public void setSupplierId(int supplierId) {
+        this.supplierId = supplierId;
+    }
+    
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 
     // Returns true when the quantity has reached or fallen below
