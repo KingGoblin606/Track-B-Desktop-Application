@@ -15,7 +15,6 @@ public class DBInitializer {
             createMaterialTable(conn);
             createDepartmentTable(conn);
             createCleanerTable(conn);
-            createCleanerDepartmentTable(conn);
             createStockIssuance(conn);
             
             
@@ -87,33 +86,19 @@ public class DBInitializer {
     }
     
     private static void createCleanerTable(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE Cleaner (
-                           CleanerID INT PRIMARY KEY,
-                           CleanerName VARCHAR(50) NOT NULL,
-                           CleanerSurname VARCHAR(50) NOT NULL,
-                           CleanerPhoneNumber VARCHAR(20) NOT NULL,
-                           CleanerEmail VARCHAR(100) NOT NULL UNIQUE
-                           )
-                           """);
-    }
-    
-    private static void createCleanerDepartmentTable(Connection conn) throws SQLException{
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE CleanerDepartment (
-                           DepartmentID INT NOT NULL,
-                           CleanerID INT NOT NULL,
-                           
-                           PRIMARY KEY (DepartmentID, CleanerID),
-                           
-                           FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
-                           FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID)
-                           )
-                           """);
+    Statement stmt = conn.createStatement();
+
+    stmt.executeUpdate("""
+                       CREATE TABLE Cleaner (
+                       CleanerID INT PRIMARY KEY,
+                       CleanerName VARCHAR(50) NOT NULL,
+                       CleanerSurname VARCHAR(50) NOT NULL,
+                       CleanerPhoneNumber VARCHAR(20) NOT NULL,
+                       CleanerEmail VARCHAR(100) NOT NULL UNIQUE,
+                       DepartmentID INT,
+                       FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+                       )
+                       """);
     }
     
     private static void createStockIssuance(Connection conn) throws SQLException {
