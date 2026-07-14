@@ -15,7 +15,7 @@ public class UserRepository
     {
         ArrayList<User> users = new ArrayList<>();
 
-        String sql = "SELECT UserID, UserName, UserPassword, UserEmail, UserRole FROM \"Users\" ORDER BY UserID";
+        String sql = "SELECT UserID, UserName, UserPassword, UserEmail, UserRole FROM Users ORDER BY UserID";
 
         try (DBConnection db = new DBConnection();
              PreparedStatement ps = db.getConnection().prepareStatement(sql);
@@ -37,7 +37,7 @@ public class UserRepository
 
     public User findByEmail(String email) 
     {
-        String sql = "SELECT UserID, UserName, UserPassword, UserEmail, UserRole FROM \"Users\" WHERE UserEmail = ?";
+        String sql = "SELECT UserID, UserName, UserPassword, UserEmail, UserRole FROM Users WHERE UserEmail = ?";
 
         try (DBConnection db = new DBConnection();
              PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
@@ -62,7 +62,7 @@ public class UserRepository
 
     public void insert(User user) 
     {
-        String sql = "INSERT INTO \"Users\" (UserID, UserName, UserPassword, UserEmail, UserRole) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Users (UserID, UserName, UserPassword, UserEmail, UserRole) VALUES (?, ?, ?, ?, ?)";
 
         try (DBConnection db = new DBConnection();
              PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
@@ -83,7 +83,7 @@ public class UserRepository
 
     public int findMaxId() 
     {
-        String sql = "SELECT MAX(UserID) AS MaxId FROM \"Users\"";
+        String sql = "SELECT MAX(UserID) AS MaxId FROM Users";
         int maxId = 0;
 
         try (DBConnection db = new DBConnection();

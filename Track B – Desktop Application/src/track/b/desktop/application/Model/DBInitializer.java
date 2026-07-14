@@ -5,29 +5,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBInitializer {
-    
+
     public static void initialize () {
         try (DBConnection db = new DBConnection()) {
             Connection conn = db.getConnection();
-            
+
             createUserTable(conn);
             createSuppliersTable(conn);
             createMaterialTable(conn);
             createDepartmentTable(conn);
             createCleanerTable(conn);
             createStockIssuance(conn);
-            
-            
+
+
         } catch (SQLException e) {
             if(!"X0Y32".equals(e.getSQLState())) {
-                e.printStackTrace();
+               e.printStackTrace();
             }
         }
+        
     }
-    
+
     private static void createUserTable(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        
+
         stmt.executeUpdate("""
                            CREATE TABLE Users (
                            UserID INT PRIMARY KEY,
@@ -39,10 +40,10 @@ public class DBInitializer {
                            )
                            """);
     }
-    
+
     private static void createSuppliersTable(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        
+
         stmt.executeUpdate("""
                            CREATE TABLE Supplier (
                            SupplierID int PRIMARY KEY,
@@ -56,10 +57,10 @@ public class DBInitializer {
                            )
                            """);
     }
-    
+
     private static void createMaterialTable(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        
+
         stmt.executeUpdate("""
                            CREATE TABLE Materials (
                            MaterialsID INT PRIMARY KEY,
@@ -73,10 +74,10 @@ public class DBInitializer {
                            )
                            """);
     }
-    
+
     private static void createDepartmentTable(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        
+
         stmt.executeUpdate("""
                            CREATE TABLE Department (
                            DepartmentID INT PRIMARY KEY,
@@ -84,7 +85,7 @@ public class DBInitializer {
                            )
                            """);
     }
-    
+
     private static void createCleanerTable(Connection conn) throws SQLException {
     Statement stmt = conn.createStatement();
 
@@ -100,10 +101,10 @@ public class DBInitializer {
                        )
                        """);
     }
-    
+
     private static void createStockIssuance(Connection conn) throws SQLException {
         Statement stmt = conn.createStatement();
-        
+
         stmt.executeUpdate("""
                            CREATE TABLE StockIssuance (
                            IssueID INT PRIMARY KEY,
@@ -111,7 +112,7 @@ public class DBInitializer {
                            CleanerID INT NOT NULL,
                            UserID INT NOT NULL,
                            Quantity INT NOT NULL,
-                           DateIssued DATE,                           
+                           DateIssued DATE,
                            FOREIGN KEY (MaterialsID) REFERENCES Materials(MaterialsID),
                            FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID),
                            FOREIGN KEY (UserID) REFERENCES Users(UserID)

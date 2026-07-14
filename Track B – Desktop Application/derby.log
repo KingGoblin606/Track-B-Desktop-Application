@@ -1,5 +1,8 @@
 ----------------------------------------------------------------
-Tue Jul 14 17:08:14 SAST 2026D001 : [0] The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217), [1] a816c00e-019f-612b-e2dc-0000008c3758, [2] D:\Class work\third year\PRG\Track-B-Desktop-Application-Christiaan\Track B – Desktop Application\ResourceManagementDB, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@5c647e05, [4] file:/D:/Class%20work/third%20year/PRG/Track-B-Desktop-Application-Christiaan/Track%20B%20%e2%80%93%20Desktop%20Application/src/lib/derby.jar
+Tue Jul 14 18:06:55 SAST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-019f-6161-9cd3-000000655860 
+on database directory D:\Class work\third year\PRG\Track-B-Desktop-Application-Christiaan\Track B – Desktop Application\ResourceManagementDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@50b4d649 
+Loaded from file:/D:/Class%20work/third%20year/PRG/Track-B-Desktop-Application-Christiaan/Track%20B%20%e2%80%93%20Desktop%20Application/src/lib/derby.jar
 java.vendor=Eclipse Adoptium
 java.runtime.version=26.0.1+8
 user.dir=D:\Class work\third year\PRG\Track-B-Desktop-Application-Christiaan\Track B – Desktop Application
@@ -7,4 +10,4 @@ os.name=Windows 11
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-C005 : [0] 
+Database Class Loader started - derby.database.classpath=''

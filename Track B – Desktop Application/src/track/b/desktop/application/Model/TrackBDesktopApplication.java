@@ -2,7 +2,6 @@ package track.b.desktop.application.Model;
 
 public class TrackBDesktopApplication 
 {
-
     public static void main(String[] args) 
     {
         DBInitializer.initialize();

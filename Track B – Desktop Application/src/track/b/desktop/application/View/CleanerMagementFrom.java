@@ -4,19 +4,233 @@
  */
 package track.b.desktop.application.View;
 
+import track.b.desktop.application.Controller.CleanerController;
+import track.b.desktop.application.Controller.DepartmentController;
+import track.b.desktop.application.Model.Cleaner;
+import track.b.desktop.application.Model.Department;
+
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author louis
  */
 public class CleanerMagementFrom extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CleanerMagementFrom.class.getName());
+
+    private final CleanerController cleanerController = new CleanerController();
+    private final DepartmentController departmentController = new DepartmentController();
+
+    // -1 means "no selection" -> btnUpdate will ADD a new cleaner instead of updating one.
+    private int selectedCleanerId = -1;
 
     /**
      * Creates new form MaterialManagementForm
      */
     public CleanerMagementFrom() {
         initComponents();
+
+        btnUpdate.addActionListener(this::btnUpdateActionPerformed);
+        btnSearch.addActionListener(this::btnSearchActionPerformed);
+        btnClear.addActionListener(this::btnClearActionPerformed);
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
+        tblCleaners.getSelectionModel().addListSelectionListener(this::tblCleanersRowSelected);
+
+        Mbar_Dashboard.addActionListener(e -> {
+            // Dashboard requires a UserController from the login session;
+            // full navigation wiring needs the session passed through from LoginForm.
+        });
+        Mbar_Cleaners.addActionListener(e -> { /* already here */ });
+        Mbar_Material.addActionListener(e -> {
+            new MaterialManagementForm().setVisible(true);
+            this.dispose();
+        });
+        Mbar_Reports.addActionListener(e -> {
+            // Reports form not built yet
+        });
+        Mbar_Logout.addActionListener(e -> {
+            new LoginForm().setVisible(true);
+            this.dispose();
+        });
+
+        refreshTable(cleanerController.getAllCleaners());
+    }
+
+    // ------------------------------------------------------------------
+    // Data loading / table helpers
+    // ------------------------------------------------------------------
+
+    private void refreshTable(ArrayList<Cleaner> cleaners) {
+        DefaultTableModel model = (DefaultTableModel) tblCleaners.getModel();
+        model.setRowCount(0);
+
+        for (Cleaner cleaner : cleaners) {
+            model.addRow(new Object[]{
+                cleaner.getCleanerId(),
+                cleaner.getName(),
+                cleaner.getSurname(),
+                cleaner.getDepartmentName() // may be null/blank if no department assigned
+            });
+        }
+    }
+
+    private void clearFields() {
+        textNames.setText("");
+        textSurname.setText("");
+        textDepartment.setText("");
+        selectedCleanerId = -1;
+        tblCleaners.clearSelection();
+    }
+
+    // Looks up a department by name (case-insensitive). If it doesn't exist
+    // yet and a name was typed, creates it. Returns null if the field was left blank.
+    private Integer resolveDepartmentId(String departmentName) {
+        if (departmentName == null || departmentName.trim().isEmpty()) {
+            return null;
+        }
+
+        String trimmed = departmentName.trim();
+
+        for (Department department : departmentController.getAllDepartments()) {
+            if (department.getDepartmentName().equalsIgnoreCase(trimmed)) {
+                return department.getDepartmentId();
+            }
+        }
+
+        // Department doesn't exist yet - create it automatically
+        Department newDepartment = departmentController.addDepartment(trimmed);
+        return newDepartment.getDepartmentId();
+    }
+
+    // ------------------------------------------------------------------
+    // Event handlers
+    // ------------------------------------------------------------------
+
+    private void tblCleanersRowSelected(javax.swing.event.ListSelectionEvent evt) {
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+
+        int row = tblCleaners.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+
+        selectedCleanerId = (int) tblCleaners.getValueAt(row, 0);
+        Cleaner cleaner = cleanerController.findCleanerById(selectedCleanerId);
+
+        if (cleaner == null) {
+            return;
+        }
+
+        textNames.setText(cleaner.getName());
+        textSurname.setText(cleaner.getSurname());
+        textDepartment.setText(cleaner.getDepartmentName() != null ? cleaner.getDepartmentName() : "");
+    }
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
+        String name = textNames.getText();
+        String surname = textSurname.getText();
+
+        // TODO: this form has no field for Phone Number or Email, but
+        // CleanerController.addCleaner()/updateCleaner() require both.
+        // Add label+textfield pairs for Phone Number and Email in the
+        // GUI Builder, then read their values here instead of these placeholders.
+        String phoneNumber = "N/A";
+        String email = "cleaner" + System.currentTimeMillis() + "@placeholder.com";
+
+        Integer departmentId;
+        try {
+            departmentId = resolveDepartmentId(textDepartment.getText());
+        } catch (IllegalArgumentException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Invalid Department",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        try {
+            if (selectedCleanerId == -1) {
+                cleanerController.addCleaner(name, surname, phoneNumber, email, departmentId);
+                javax.swing.JOptionPane.showMessageDialog(this, "Cleaner added.");
+            } else {
+                cleanerController.updateCleaner(selectedCleanerId, name, surname, phoneNumber, email, departmentId);
+                javax.swing.JOptionPane.showMessageDialog(this, "Cleaner updated.");
+            }
+
+            clearFields();
+            refreshTable(cleanerController.getAllCleaners());
+
+        } catch (IllegalArgumentException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Could Not Save Cleaner",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
+        String searchText = javax.swing.JOptionPane.showInputDialog(
+                this,
+                "Search by ID, name, surname or department:",
+                "Search Cleaners",
+                javax.swing.JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (searchText == null) {
+            return; // user cancelled
+        }
+
+        refreshTable(cleanerController.searchCleaners(searchText));
+    }
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+        refreshTable(cleanerController.getAllCleaners());
+    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedCleanerId == -1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Select a cleaner in the table first.",
+                    "No Selection",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Delete this cleaner? This cannot be undone.\n"
+                + "Note: any stock issuance records for this cleaner must be removed first.",
+                "Confirm Delete",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            cleanerController.deleteCleaner(selectedCleanerId);
+            clearFields();
+            refreshTable(cleanerController.getAllCleaners());
+        } catch (RuntimeException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Could not delete cleaner. They likely still have stock issuance records linked to them.",
+                    "Delete Failed",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
@@ -54,16 +268,7 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
         tblCleaners.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblCleaners.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Surname", "Department"
@@ -98,10 +303,6 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
         btnClear.setText("Clear");
 
         btnDelete.setText("Delete");
-
-        textSurname.addActionListener(this::textSurnameActionPerformed);
-
-        textDepartment.addActionListener(this::textDepartmentActionPerformed);
 
         Mbar_Dashboard.setText("Dashboard");
         MenuBar_Cleaners.add(Mbar_Dashboard);
@@ -190,23 +391,12 @@ public class CleanerMagementFrom extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDepartmentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textDepartmentActionPerformed
-
-    private void textSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSurnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textSurnameActionPerformed
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

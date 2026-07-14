@@ -24,7 +24,7 @@ public class StockIssuanceRepository
                      FROM StockIssuance si
                      JOIN Materials m ON si.MaterialsID = m.MaterialsID
                      JOIN Cleaner c ON si.CleanerID = c.CleanerID
-                     JOIN "Users" u ON si.UserID = u.UserID
+                     JOIN Users u ON si.UserID = u.UserID
                      ORDER BY si.DateIssued DESC, si.IssueID DESC
                      """;
 
