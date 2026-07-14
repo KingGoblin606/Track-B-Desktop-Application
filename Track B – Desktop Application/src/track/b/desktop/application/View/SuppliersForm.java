@@ -4,19 +4,206 @@
  */
 package track.b.desktop.application.View;
 
+import track.b.desktop.application.Controller.SupplierController;
+import track.b.desktop.application.Model.Supplier;
+
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author louis
  */
 public class SuppliersForm extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SuppliersForm.class.getName());
+
+    private final SupplierController supplierController = new SupplierController();
+
+    // -1 means "no selection" -> btnUpdate will ADD a new supplier instead of updating one.
+    private int selectedSupplierId = -1;
 
     /**
      * Creates new form MaterialManagementForm
      */
     public SuppliersForm() {
         initComponents();
+
+        btnUpdate.addActionListener(this::btnUpdateActionPerformed);
+        btnSearch.addActionListener(this::btnSearchActionPerformed);
+        btnClear.addActionListener(this::btnClearActionPerformed);
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
+        tblSuppliers.getSelectionModel().addListSelectionListener(this::tblSuppliersRowSelected);
+
+        Mbar_Dashboard.addActionListener(e -> {
+            // Dashboard requires a UserController from the login session;
+            // full navigation wiring needs the session passed through from LoginForm.
+        });
+        Mbar_Cleaners.addActionListener(e -> {
+            new CleanerMagementFrom().setVisible(true);
+            this.dispose();
+        });
+        Mbar_Material.addActionListener(e -> {
+            new MaterialManagementForm().setVisible(true);
+            this.dispose();
+        });
+        Mbar_Reports.addActionListener(e -> {
+            // Reports form not built yet
+        });
+        Mbar_Logout.addActionListener(e -> {
+            new LoginForm().setVisible(true);
+            this.dispose();
+        });
+
+        refreshTable(supplierController.getAllSuppliers());
+    }
+
+    // ------------------------------------------------------------------
+    // Data loading / table helpers
+    // ------------------------------------------------------------------
+
+    private void refreshTable(ArrayList<Supplier> suppliers) {
+        DefaultTableModel model = (DefaultTableModel) tblSuppliers.getModel();
+        model.setRowCount(0);
+
+        for (Supplier supplier : suppliers) {
+            model.addRow(new Object[]{
+                supplier.getSupplierId(),
+                supplier.getSupplierName(),
+                supplier.getContactPerson(),
+                supplier.getEmail(),
+                supplier.getPhoneNumber()
+            });
+        }
+    }
+
+    private void clearFields() {
+        textCompanyName.setText("");
+        textSurname.setText("");
+        textSupplierEmail.setText("");
+        textCellNumber.setText("");
+        selectedSupplierId = -1;
+        tblSuppliers.clearSelection();
+    }
+
+    // ------------------------------------------------------------------
+    // Event handlers
+    // ------------------------------------------------------------------
+
+    private void tblSuppliersRowSelected(javax.swing.event.ListSelectionEvent evt) {
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+
+        int row = tblSuppliers.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+
+        selectedSupplierId = (int) tblSuppliers.getValueAt(row, 0);
+        Supplier supplier = supplierController.findSupplierById(selectedSupplierId);
+
+        if (supplier == null) {
+            return;
+        }
+
+        textCompanyName.setText(supplier.getSupplierName());
+        textSurname.setText(supplier.getContactPerson());
+        textSupplierEmail.setText(supplier.getEmail());
+        textCellNumber.setText(supplier.getPhoneNumber());
+    }
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
+        String supplierName = textCompanyName.getText();
+        String contactPerson = textSurname.getText();
+        String email = textSupplierEmail.getText();
+        String phoneNumber = textCellNumber.getText();
+
+        // TODO: this form has no fields for Street Address, City or Postal Code,
+        // but SupplierController.addSupplier()/updateSupplier() require them.
+        // Add three more label+textfield pairs in the GUI Builder, then read
+        // their values here instead of these placeholders.
+        String streetAddress = "N/A";
+        String city = "N/A";
+        String postalCode = "N/A";
+
+        try {
+            if (selectedSupplierId == -1) {
+                supplierController.addSupplier(supplierName, contactPerson, phoneNumber, email, streetAddress, city, postalCode);
+                javax.swing.JOptionPane.showMessageDialog(this, "Supplier added.");
+            } else {
+                supplierController.updateSupplier(selectedSupplierId, supplierName, contactPerson, phoneNumber, email, streetAddress, city, postalCode);
+                javax.swing.JOptionPane.showMessageDialog(this, "Supplier updated.");
+            }
+
+            clearFields();
+            refreshTable(supplierController.getAllSuppliers());
+
+        } catch (IllegalArgumentException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Could Not Save Supplier",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
+        String searchText = javax.swing.JOptionPane.showInputDialog(
+                this,
+                "Search by ID, company name, contact person or email:",
+                "Search Suppliers",
+                javax.swing.JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (searchText == null) {
+            return; // user cancelled
+        }
+
+        refreshTable(supplierController.searchSuppliers(searchText));
+    }
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+        refreshTable(supplierController.getAllSuppliers());
+    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedSupplierId == -1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Select a supplier in the table first.",
+                    "No Selection",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Delete this supplier? This cannot be undone.\n"
+                + "Note: any materials linked to this supplier must be removed first.",
+                "Confirm Delete",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            supplierController.deleteSupplier(selectedSupplierId);
+            clearFields();
+            refreshTable(supplierController.getAllSuppliers());
+        } catch (RuntimeException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Could not delete supplier. It is likely still linked to one or more materials.",
+                    "Delete Failed",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**
@@ -56,16 +243,7 @@ public class SuppliersForm extends javax.swing.JFrame {
         tblSuppliers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblSuppliers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Company Name", "Name of Contact", "Email", "Cell Number"
@@ -85,7 +263,7 @@ public class SuppliersForm extends javax.swing.JFrame {
         lbl_TableName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_TableName.setText("Suppliers Table");
 
-        lblTitel.setText("Cleaner Details:");
+        lblTitel.setText("Supplier Details:");
 
         lblCompanyName.setText("Company Name:");
 
@@ -101,13 +279,7 @@ public class SuppliersForm extends javax.swing.JFrame {
 
         btnDelete.setText("Delete");
 
-        textSurname.addActionListener(this::textSurnameActionPerformed);
-
-        textSupplierEmail.addActionListener(this::textSupplierEmailActionPerformed);
-
         lblCellNumber.setText("Cell Number:");
-
-        textCellNumber.addActionListener(this::textCellNumberActionPerformed);
 
         Mbar_Dashboard.setText("Dashboard");
         MenuBar_Suppliers.add(Mbar_Dashboard);
@@ -203,27 +375,12 @@ public class SuppliersForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textSupplierEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSupplierEmailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textSupplierEmailActionPerformed
-
-    private void textSurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textSurnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textSurnameActionPerformed
-
-    private void textCellNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCellNumberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCellNumberActionPerformed
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

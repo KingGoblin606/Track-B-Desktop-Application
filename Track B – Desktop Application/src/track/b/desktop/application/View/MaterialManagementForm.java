@@ -4,19 +4,230 @@
  */
 package track.b.desktop.application.View;
 
+import track.b.desktop.application.Controller.MaterialController;
+import track.b.desktop.application.Model.Material;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author louis
  */
 public class MaterialManagementForm extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MaterialManagementForm.class.getName());
+
+    private final MaterialController materialController = new MaterialController();
+
+    // Tracks which material is currently selected in the table.
+    // -1 means "no selection" -> btnUpdate will ADD a new material instead of updating one.
+    private int selectedMaterialId = -1;
 
     /**
      * Creates new form MaterialManagementForm
      */
     public MaterialManagementForm() {
         initComponents();
+
+        // Wire up listeners that the Form Editor doesn't attach automatically
+        btnUpdate.addActionListener(this::btnUpdateActionPerformed);
+        btnSearch.addActionListener(this::btnSearchActionPerformed);
+        btnClear.addActionListener(this::btnClearActionPerformed);
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
+        tblMaterial.getSelectionModel().addListSelectionListener(this::tblMaterialRowSelected);
+
+        // Basic menu bar navigation
+        Mbar_Dashboard.addActionListener(e -> {
+            // Dashboard currently requires a UserController from login session;
+            // wiring this properly needs the logged-in UserController passed through.
+        });
+        Mbar_Cleaners.addActionListener(e -> {
+            new CleanerMagementFrom().setVisible(true);
+            this.dispose();
+        });
+        Mbar_Material.addActionListener(e -> { /* already here */ });
+        Mbar_Reports.addActionListener(e -> {
+            // Reports form not built yet
+        });
+        Mbar_Logout.addActionListener(e -> {
+            new LoginForm().setVisible(true);
+            this.dispose();
+        });
+
+        loadFilterOptions();
+        refreshTable(materialController.getAllMaterials());
+    }
+
+    // ------------------------------------------------------------------
+    // Data loading / table helpers
+    // ------------------------------------------------------------------
+
+    private void refreshTable(ArrayList<Material> materials) {
+        DefaultTableModel model = (DefaultTableModel) tblMaterial.getModel();
+        model.setRowCount(0);
+
+        for (Material material : materials) {
+            model.addRow(new Object[]{
+                material.getMaterialId(),
+                material.getName(),
+                material.getCategory(),
+                material.getQuantity(),
+                material.getReorderLevel(),
+                material.getStockStatus()
+            });
+        }
+    }
+
+    private void loadFilterOptions() {
+        LinkedHashSet<String> options = new LinkedHashSet<>();
+        options.add("All");
+        options.add("Low Stock");
+        options.add("Out of Stock");
+
+        for (Material material : materialController.getAllMaterials()) {
+            options.add(material.getCategory());
+        }
+
+        comboBox_Material.setModel(
+                new javax.swing.DefaultComboBoxModel<>(options.toArray(new String[0]))
+        );
+    }
+
+    private void clearFields() {
+        textNames.setText("");
+        textCategory.setText("");
+        textQuantity.setText("");
+        textReorderlvl.setText("");
+        textSupplier.setText("");
+        selectedMaterialId = -1;
+        tblMaterial.clearSelection();
+    }
+
+    // ------------------------------------------------------------------
+    // Event handlers
+    // ------------------------------------------------------------------
+
+    private void tblMaterialRowSelected(javax.swing.event.ListSelectionEvent evt) {
+        if (evt.getValueIsAdjusting()) {
+            return;
+        }
+
+        int row = tblMaterial.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+
+        selectedMaterialId = (int) tblMaterial.getValueAt(row, 0);
+        Material material = materialController.findMaterialById(selectedMaterialId);
+
+        if (material == null) {
+            return;
+        }
+
+        textNames.setText(material.getName());
+        textCategory.setText(material.getCategory());
+        textQuantity.setText(String.valueOf(material.getQuantity()));
+        textReorderlvl.setText(String.valueOf(material.getReorderLevel()));
+        textSupplier.setText(String.valueOf(material.getSupplierId()));
+    }
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {
+        String name = textNames.getText();
+        String category = textCategory.getText();
+
+        int quantity;
+        int reorderLevel;
+        int supplierId;
+
+        try {
+            quantity = Integer.parseInt(textQuantity.getText().trim());
+            reorderLevel = Integer.parseInt(textReorderlvl.getText().trim());
+            supplierId = Integer.parseInt(textSupplier.getText().trim());
+        } catch (NumberFormatException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Quantity, Reorder Level and Supplier must be numbers.",
+                    "Invalid Input",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // TODO: cost is not yet a field on this form. Add a Cost label + JTextField
+        // in the GUI Builder, then read it here instead of hardcoding 0.
+        int cost = 0;
+
+        try {
+            if (selectedMaterialId == -1) {
+                materialController.addMaterial(name, category, quantity, reorderLevel, cost, supplierId);
+                javax.swing.JOptionPane.showMessageDialog(this, "Material added.");
+            } else {
+                materialController.updateMaterial(selectedMaterialId, name, category, quantity, reorderLevel, cost, supplierId);
+                javax.swing.JOptionPane.showMessageDialog(this, "Material updated.");
+            }
+
+            clearFields();
+            loadFilterOptions();
+            refreshTable(materialController.getAllMaterials());
+
+        } catch (IllegalArgumentException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    ex.getMessage(),
+                    "Could Not Save Material",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {
+        String searchText = javax.swing.JOptionPane.showInputDialog(
+                this,
+                "Search by ID, name, category or supplier:",
+                "Search Materials",
+                javax.swing.JOptionPane.PLAIN_MESSAGE
+        );
+
+        if (searchText == null) {
+            return; // user cancelled
+        }
+
+        refreshTable(materialController.searchMaterials(searchText));
+    }
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {
+        clearFields();
+        refreshTable(materialController.getAllMaterials());
+    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedMaterialId == -1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Select a material in the table first.",
+                    "No Selection",
+                    javax.swing.JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Delete this material? This cannot be undone.",
+                "Confirm Delete",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        materialController.deleteMaterial(selectedMaterialId);
+        clearFields();
+        loadFilterOptions();
+        refreshTable(materialController.getAllMaterials());
     }
 
     /**
@@ -60,16 +271,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
         tblMaterial.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Category", "Quantity", "Reorder", "Status"
@@ -91,7 +293,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
 
         lbl_Filter.setText("Filter:");
 
-        comboBox_Material.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_Material.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Low Stock", "Out of Stock" }));
         comboBox_Material.addActionListener(this::comboBox_MaterialActionPerformed);
 
         lblTitel.setText("Material Details:");
@@ -113,12 +315,6 @@ public class MaterialManagementForm extends javax.swing.JFrame {
         btnClear.setText("Clear");
 
         btnDelete.setText("Delete");
-
-        textCategory.addActionListener(this::textCategoryActionPerformed);
-
-        textQuantity.addActionListener(this::textQuantityActionPerformed);
-
-        textReorderlvl.addActionListener(this::textReorderlvlActionPerformed);
 
         Mbar_Dashboard.setText("Dashboard");
         MenuBar_Material.add(Mbar_Dashboard);
@@ -233,20 +429,11 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboBox_MaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBox_MaterialActionPerformed
-        // TODO add your handling code here:
+        Object selected = comboBox_Material.getSelectedItem();
+        if (selected != null) {
+            refreshTable(materialController.filterMaterials(selected.toString()));
+        }
     }//GEN-LAST:event_comboBox_MaterialActionPerformed
-
-    private void textQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textQuantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textQuantityActionPerformed
-
-    private void textReorderlvlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textReorderlvlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textReorderlvlActionPerformed
-
-    private void textCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textCategoryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textCategoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,9 +441,6 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
