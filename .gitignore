@@ -1,0 +1,23 @@
+
+# Build output — auto-generated, never commit
+
+/Track B – Desktop Application/build/
+/Track B – Desktop Application/dist/
+*.class
+
+
+# NetBeans per-machine IDE settings — broke builds when shared
+
+/Track B – Desktop Application/nbproject/private/
+
+
+# Derby database — runtime data, recreated fresh by DBInitializer.java
+/Track B – Desktop Application/ResourceManagementDB/
+/Track B – Desktop Application/derby.log
+
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*~
