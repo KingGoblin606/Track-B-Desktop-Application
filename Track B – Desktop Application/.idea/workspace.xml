@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9a17e543-c3e1-4e47-bff5-cd61bbd07252" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/db.lck" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/db.lck" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/log/log.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/log/log.ctrl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/log/log1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/log/log1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/log/logmirror.ctrl" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/log/logmirror.ctrl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c101.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c101.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c111.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c111.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c121.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c121.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c130.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c130.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c141.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c141.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c150.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c150.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c161.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c161.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c171.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c171.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c1e0.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c1e0.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c1f1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c1f1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c20.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c20.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c200.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c200.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c211.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c211.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c221.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c221.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c31.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c31.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c41.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c41.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c490.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c490.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c4c0.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c4c0.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c4f0.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c4f0.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c51.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c51.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c520.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c520.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c540.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c540.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c580.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c580.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c60.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c60.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c71.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c71.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c81.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c81.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/c90.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/c90.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/ca1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/ca1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/cb1.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/cb1.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ResourceManagementDB/seg0/cf0.dat" beforeDir="false" afterPath="$PROJECT_DIR$/ResourceManagementDB/seg0/cf0.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/track/b/desktop/application/View/DashboardForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/track/b/desktop/application/View/DashboardForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/track/b/desktop/application/View/DashboardForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/track/b/desktop/application/View/DashboardForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/derby.log" beforeDir="false" afterPath="$PROJECT_DIR$/derby.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/track/b/desktop/application/View/DashboardForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/track/b/desktop/application/View/DashboardForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/track/b/desktop/application/View/DashboardForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/track/b/desktop/application/View/DashboardForm.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="3GVCL5fVJCs1KXsNpsgLYtcAN8U" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "Ethan-Branch",
+    "kotlin-language-version-configured": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9a17e543-c3e1-4e47-bff5-cd61bbd07252" name="Changes" comment="" />
+      <created>1784047291613</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1784047291613</updated>
+      <workItem from="1784047293405" duration="20000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
