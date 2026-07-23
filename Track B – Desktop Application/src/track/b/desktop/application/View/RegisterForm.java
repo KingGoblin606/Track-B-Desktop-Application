@@ -1,5 +1,9 @@
 package track.b.desktop.application.View;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JButton;
+
 public class RegisterForm extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegisterForm.class.getName());
@@ -9,6 +13,18 @@ public class RegisterForm extends javax.swing.JFrame {
     public RegisterForm() {
         initComponents();
         setLocationRelativeTo(null);
+        
+                FocusAdapter fa;
+        fa = new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                JButton button = (JButton) e.getSource();
+                getRootPane().setDefaultButton(button);
+            }
+        };
+        
+        btn_Register.addFocusListener(fa);
+        btn_Back.addFocusListener(fa);
     }
 
     @SuppressWarnings("unchecked")
