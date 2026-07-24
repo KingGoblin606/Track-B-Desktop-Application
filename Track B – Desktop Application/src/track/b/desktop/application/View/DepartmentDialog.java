@@ -8,7 +8,18 @@ public class DepartmentDialog extends javax.swing.JDialog {
     public DepartmentDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.png")).getImage());
         setLocationRelativeTo(parent);
+        
+        tbl_Dept.getTableHeader().setBackground(new java.awt.Color(23, 34, 45));
+        tbl_Dept.getTableHeader().setForeground(new java.awt.Color(140, 160, 175));
+        tbl_Dept.getTableHeader().setFont(new java.awt.Font("Consolas", 0, 11));
+
+        tbl_Dept.setBackground(new java.awt.Color(18, 28, 39));
+        jScrollPane2.getViewport().setBackground(new java.awt.Color(18, 28, 39));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        
+        
         setupTable();
         loadDepartments();
         setupSelectionListener();
@@ -95,6 +106,7 @@ public class DepartmentDialog extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        MainPanel = new javax.swing.JPanel();
         tf_DeptName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btn_Add = new javax.swing.JButton();
@@ -118,11 +130,22 @@ public class DepartmentDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        MainPanel.setBackground(new java.awt.Color(11, 18, 26));
+
+        tf_DeptName.setBackground(new java.awt.Color(29, 42, 54));
+        tf_DeptName.setForeground(new java.awt.Color(231, 238, 243));
+        tf_DeptName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+
+        jLabel1.setForeground(new java.awt.Color(140, 160, 175));
         jLabel1.setText("Department Name:");
 
+        btn_Add.setBackground(new java.awt.Color(23, 232, 200));
+        btn_Add.setForeground(new java.awt.Color(11, 18, 26));
         btn_Add.setText("Add");
         btn_Add.addActionListener(this::btn_AddActionPerformed);
 
+        tbl_Dept.setBackground(new java.awt.Color(18, 28, 39));
+        tbl_Dept.setForeground(new java.awt.Color(231, 238, 243));
         tbl_Dept.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -134,53 +157,75 @@ public class DepartmentDialog extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_Dept.setGridColor(new java.awt.Color(36, 51, 63));
+        tbl_Dept.setRowHeight(36);
+        tbl_Dept.setSelectionBackground(new java.awt.Color(29, 42, 54));
+        tbl_Dept.setSelectionForeground(new java.awt.Color(23, 232, 200));
         jScrollPane2.setViewportView(tbl_Dept);
 
+        btn_Update.setBackground(new java.awt.Color(29, 42, 54));
         btn_Update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_Update.setForeground(new java.awt.Color(231, 238, 243));
         btn_Update.setText("Update Department");
+        btn_Update.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(50, 68, 84)));
         btn_Update.addActionListener(this::btn_UpdateActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Department");
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 464, Short.MAX_VALUE)
+            .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(MainPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2)
+                        .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                            .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(MainPanelLayout.createSequentialGroup()
+                                    .addComponent(tf_DeptName, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_Add))
+                                .addComponent(jLabel1))
+                            .addGap(45, 45, 45)))
+                    .addContainerGap()))
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+            .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(MainPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel2)
+                    .addGap(23, 23, 23)
+                    .addComponent(jLabel1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_Add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tf_DeptName))
+                    .addGap(18, 18, 18)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tf_DeptName, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Add))
-                    .addComponent(jLabel1))
-                .addGap(45, 45, 45))
+            .addComponent(MainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel2)
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_DeptName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Add))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Update)
-                .addContainerGap(16, Short.MAX_VALUE))
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -260,6 +305,7 @@ public class DepartmentDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JButton btn_Add;
     private javax.swing.JButton btn_Update;
     private javax.swing.JLabel jLabel1;
