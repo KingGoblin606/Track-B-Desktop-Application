@@ -15,7 +15,20 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     { 
        this.userController = userController;
         initComponents();
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/Images/logo.png")).getImage());
         setLocationRelativeTo(null);
+        
+        MenuBar_Material.add(javax.swing.Box.createHorizontalGlue(), 2);
+        MenuBar_Material.add(javax.swing.Box.createHorizontalGlue(), 9);
+        
+        tblMaterial.getTableHeader().setBackground(new java.awt.Color(23, 34, 45));
+        tblMaterial.getTableHeader().setForeground(new java.awt.Color(140, 160, 175));
+        tblMaterial.getTableHeader().setFont(new java.awt.Font("Consolas", 0, 11));
+
+        tblMaterial.setBackground(new java.awt.Color(18, 28, 39));
+        scrollPanel_Material.getViewport().setBackground(new java.awt.Color(18, 28, 39));
+        scrollPanel_Material.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        
         setupTable();
         setupFilterComboBox();
         loadSuppliersIntoComboBox();
@@ -195,30 +208,34 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MainPanel = new javax.swing.JPanel();
         scrollPanel_Material = new javax.swing.JScrollPane();
         tblMaterial = new javax.swing.JTable();
         lbl_TableName = new javax.swing.JLabel();
         lbl_Filter = new javax.swing.JLabel();
         comboBox_Material = new javax.swing.JComboBox<>();
-        lblTitel = new javax.swing.JLabel();
-        lblNames = new javax.swing.JLabel();
-        lblCategory = new javax.swing.JLabel();
-        lblQuantity = new javax.swing.JLabel();
-        lblReorder = new javax.swing.JLabel();
-        lblSupplier = new javax.swing.JLabel();
-        btnUpdate = new javax.swing.JButton();
-        btnSearch = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         btnDelete = new javax.swing.JButton();
-        tb_names = new javax.swing.JTextField();
-        tb_category = new javax.swing.JTextField();
-        tb_quantity = new javax.swing.JTextField();
-        tb_Reorder = new javax.swing.JTextField();
-        btn_add = new javax.swing.JButton();
-        lblSupplier1 = new javax.swing.JLabel();
         tb_Cost = new javax.swing.JTextField();
+        lblSupplier1 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
+        lblSupplier = new javax.swing.JLabel();
         Cb_Supplier = new javax.swing.JComboBox<>();
+        tb_Reorder = new javax.swing.JTextField();
+        lblReorder = new javax.swing.JLabel();
+        lblQuantity = new javax.swing.JLabel();
+        tb_quantity = new javax.swing.JTextField();
+        tb_category = new javax.swing.JTextField();
+        lblCategory = new javax.swing.JLabel();
+        lblNames = new javax.swing.JLabel();
+        tb_names = new javax.swing.JTextField();
+        lblTitel = new javax.swing.JLabel();
         MenuBar_Material = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         Mbar_Dashboard = new javax.swing.JMenu();
         Mbar_Cleaners = new javax.swing.JMenu();
         Mbar_Material = new javax.swing.JMenu();
@@ -229,7 +246,11 @@ public class MaterialManagementForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        MainPanel.setBackground(new java.awt.Color(11, 18, 26));
+
+        tblMaterial.setBackground(new java.awt.Color(18, 28, 39));
         tblMaterial.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tblMaterial.setForeground(new java.awt.Color(231, 238, 243));
         tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -255,81 +276,279 @@ public class MaterialManagementForm extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tblMaterial.setGridColor(new java.awt.Color(36, 51, 63));
+        tblMaterial.setRowHeight(36);
+        tblMaterial.setSelectionBackground(new java.awt.Color(29, 42, 54));
         scrollPanel_Material.setViewportView(tblMaterial);
         tblMaterial.getAccessibleContext().setAccessibleName("tblMaterial");
 
-        lbl_TableName.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        lbl_TableName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TableName.setText("Material Table");
+        lbl_TableName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lbl_TableName.setForeground(new java.awt.Color(140, 160, 175));
+        lbl_TableName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_TableName.setText("Materials");
 
-        lbl_Filter.setText("Filter:");
+        lbl_Filter.setForeground(new java.awt.Color(140, 160, 175));
+        lbl_Filter.setText("FILTER BY CATEGORY");
 
+        comboBox_Material.setBackground(new java.awt.Color(29, 42, 54));
+        comboBox_Material.setForeground(new java.awt.Color(231, 238, 243));
         comboBox_Material.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBox_Material.addActionListener(this::comboBox_MaterialActionPerformed);
 
-        lblTitel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblTitel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitel.setText("Material Details");
+        jPanel1.setBackground(new java.awt.Color(18, 28, 39));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63), 2));
 
-        lblNames.setText("Names:");
+        btnDelete.setForeground(new java.awt.Color(255, 92, 122));
+        btnDelete.setText("Delete");
+        btnDelete.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 92, 122)));
+        btnDelete.setContentAreaFilled(false);
+        btnDelete.addActionListener(this::btnDeleteActionPerformed);
 
-        lblCategory.setText("Category:");
+        tb_Cost.setBackground(new java.awt.Color(29, 42, 54));
+        tb_Cost.setForeground(new java.awt.Color(231, 238, 243));
+        tb_Cost.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
 
-        lblQuantity.setText("Quantity:");
+        lblSupplier1.setForeground(new java.awt.Color(140, 160, 175));
+        lblSupplier1.setText("Cost:");
 
-        lblReorder.setText("Reorder Level:");
+        btnClear.setForeground(new java.awt.Color(140, 160, 175));
+        btnClear.setText("Clear");
+        btnClear.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        btnClear.setContentAreaFilled(false);
+        btnClear.addActionListener(this::btnClearActionPerformed);
 
-        lblSupplier.setText("Supplier:");
+        btnSearch.setForeground(new java.awt.Color(140, 160, 175));
+        btnSearch.setText("Search");
+        btnSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        btnSearch.setContentAreaFilled(false);
+        btnSearch.addActionListener(this::btnSearchActionPerformed);
 
+        btnUpdate.setBackground(new java.awt.Color(29, 42, 54));
+        btnUpdate.setForeground(new java.awt.Color(231, 238, 243));
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(this::btnUpdateActionPerformed);
 
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(this::btnSearchActionPerformed);
-
-        btnClear.setText("Clear");
-        btnClear.addActionListener(this::btnClearActionPerformed);
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(this::btnDeleteActionPerformed);
-
-        tb_category.addActionListener(this::tb_categoryActionPerformed);
-
-        tb_quantity.addActionListener(this::tb_quantityActionPerformed);
-
-        tb_Reorder.addActionListener(this::tb_ReorderActionPerformed);
-
+        btn_add.setBackground(new java.awt.Color(23, 232, 200));
+        btn_add.setForeground(new java.awt.Color(11, 18, 26));
         btn_add.setText("Add");
         btn_add.addActionListener(this::btn_addActionPerformed);
 
-        lblSupplier1.setText("Cost:");
+        lblSupplier.setForeground(new java.awt.Color(140, 160, 175));
+        lblSupplier.setText("Supplier:");
 
+        Cb_Supplier.setBackground(new java.awt.Color(29, 42, 54));
+        Cb_Supplier.setForeground(new java.awt.Color(231, 238, 243));
         Cb_Supplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Cb_Supplier.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
 
+        tb_Reorder.setBackground(new java.awt.Color(29, 42, 54));
+        tb_Reorder.setForeground(new java.awt.Color(231, 238, 243));
+        tb_Reorder.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        tb_Reorder.addActionListener(this::tb_ReorderActionPerformed);
+
+        lblReorder.setForeground(new java.awt.Color(140, 160, 175));
+        lblReorder.setText("Reorder Level:");
+
+        lblQuantity.setForeground(new java.awt.Color(140, 160, 175));
+        lblQuantity.setText("Quantity:");
+
+        tb_quantity.setBackground(new java.awt.Color(29, 42, 54));
+        tb_quantity.setForeground(new java.awt.Color(231, 238, 243));
+        tb_quantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        tb_quantity.addActionListener(this::tb_quantityActionPerformed);
+
+        tb_category.setBackground(new java.awt.Color(29, 42, 54));
+        tb_category.setForeground(new java.awt.Color(231, 238, 243));
+        tb_category.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+        tb_category.addActionListener(this::tb_categoryActionPerformed);
+
+        lblCategory.setForeground(new java.awt.Color(140, 160, 175));
+        lblCategory.setText("Category:");
+
+        lblNames.setForeground(new java.awt.Color(140, 160, 175));
+        lblNames.setText("Names:");
+
+        tb_names.setBackground(new java.awt.Color(29, 42, 54));
+        tb_names.setForeground(new java.awt.Color(231, 238, 243));
+        tb_names.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(36, 51, 63)));
+
+        lblTitel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTitel.setForeground(new java.awt.Color(231, 238, 243));
+        lblTitel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblTitel.setText("Material Details");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(Cb_Supplier, javax.swing.GroupLayout.Alignment.LEADING, 0, 250, Short.MAX_VALUE)
+                                        .addComponent(tb_quantity, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tb_names, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(lblQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblNames))
+                                .addGap(112, 112, 112)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tb_category, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                    .addComponent(lblCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tb_Reorder)
+                                    .addComponent(tb_Cost)
+                                    .addComponent(lblSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblReorder)))
+                            .addComponent(lblTitel, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(lblTitel)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNames)
+                    .addComponent(lblCategory))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tb_names, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tb_category, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblQuantity)
+                    .addComponent(lblReorder))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tb_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tb_Reorder, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSupplier)
+                    .addComponent(lblSupplier1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Cb_Supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tb_Cost, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
+        );
+
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(MainPanelLayout.createSequentialGroup()
+                                .addComponent(lbl_TableName, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboBox_Material, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Filter)))
+                            .addComponent(scrollPanel_Material, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addGap(308, 308, 308)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_TableName)
+                    .addGroup(MainPanelLayout.createSequentialGroup()
+                        .addComponent(lbl_Filter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBox_Material, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(scrollPanel_Material, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+
+        comboBox_Material.getAccessibleContext().setAccessibleName("cmbMaterial");
+        comboBox_Material.getAccessibleContext().setAccessibleDescription("");
+
+        MenuBar_Material.setBackground(new java.awt.Color(18, 28, 39));
+        MenuBar_Material.setPreferredSize(new java.awt.Dimension(465, 52));
+
+        jMenu1.setForeground(new java.awt.Color(23, 232, 200));
+        jMenu1.setText("●");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        MenuBar_Material.add(jMenu1);
+
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("CampusClean OS");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        MenuBar_Material.add(jMenu2);
+
+        Mbar_Dashboard.setForeground(new java.awt.Color(255, 255, 255));
         Mbar_Dashboard.setText("Dashboard");
+        Mbar_Dashboard.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Mbar_Dashboard.addActionListener(this::Mbar_DashboardActionPerformed);
         MenuBar_Material.add(Mbar_Dashboard);
 
+        Mbar_Cleaners.setForeground(new java.awt.Color(255, 255, 255));
         Mbar_Cleaners.setText("Cleaners");
+        Mbar_Cleaners.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Mbar_Cleaners.addActionListener(this::Mbar_CleanersActionPerformed);
         MenuBar_Material.add(Mbar_Cleaners);
 
+        Mbar_Material.setForeground(new java.awt.Color(23, 232, 200));
         Mbar_Material.setText("Materials");
+        Mbar_Material.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         MenuBar_Material.add(Mbar_Material);
 
+        btn_M_Suppliers.setForeground(new java.awt.Color(255, 255, 255));
         btn_M_Suppliers.setText("Suppliers");
+        btn_M_Suppliers.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         btn_M_Suppliers.addActionListener(this::btn_M_SuppliersActionPerformed);
         MenuBar_Material.add(btn_M_Suppliers);
 
+        Mbar_Stock.setForeground(new java.awt.Color(255, 255, 255));
         Mbar_Stock.setText("Stock Issuance");
+        Mbar_Stock.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Mbar_Stock.addActionListener(this::Mbar_StockActionPerformed);
         MenuBar_Material.add(Mbar_Stock);
 
+        Mbar_Reports.setForeground(new java.awt.Color(255, 255, 255));
         Mbar_Reports.setText("Reports");
+        Mbar_Reports.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Mbar_Reports.addActionListener(this::Mbar_ReportsActionPerformed);
         MenuBar_Material.add(Mbar_Reports);
 
+        Mbar_Logout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 16));
+        Mbar_Logout.setForeground(new java.awt.Color(255, 92, 122));
         Mbar_Logout.setText("Logout");
+        Mbar_Logout.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         Mbar_Logout.addActionListener(this::Mbar_LogoutActionPerformed);
         MenuBar_Material.add(Mbar_Logout);
 
@@ -339,107 +558,12 @@ public class MaterialManagementForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(lblTitel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(btnUpdate)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnClear)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete)
-                        .addGap(185, 185, 185))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSupplier1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tb_Cost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(lblSupplier, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblQuantity, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblReorder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(lblNames))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tb_names, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(tb_category, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(tb_quantity, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(tb_Reorder, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(Cb_Supplier, 0, 1, Short.MAX_VALUE))
-                                .addGap(325, 325, 325))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lbl_Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBox_Material, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrollPanel_Material, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_TableName, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboBox_Material, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Filter))
-                .addGap(12, 12, 12)
-                .addComponent(lbl_TableName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPanel_Material, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTitel)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNames)
-                    .addComponent(tb_names, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategory)
-                    .addComponent(tb_category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblQuantity)
-                    .addComponent(tb_quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblReorder)
-                    .addComponent(tb_Reorder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSupplier)
-                    .addComponent(Cb_Supplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSupplier1)
-                    .addComponent(tb_Cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnSearch)
-                    .addComponent(btnClear)
-                    .addComponent(btnDelete))
-                .addGap(14, 14, 14))
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        comboBox_Material.getAccessibleContext().setAccessibleName("cmbMaterial");
-        comboBox_Material.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -607,6 +731,7 @@ public class MaterialManagementForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Cb_Supplier;
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JMenu Mbar_Cleaners;
     private javax.swing.JMenu Mbar_Dashboard;
     private javax.swing.JMenu Mbar_Logout;
@@ -621,6 +746,9 @@ public class MaterialManagementForm extends javax.swing.JFrame {
     private javax.swing.JMenu btn_M_Suppliers;
     private javax.swing.JButton btn_add;
     private javax.swing.JComboBox<String> comboBox_Material;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblNames;
     private javax.swing.JLabel lblQuantity;
