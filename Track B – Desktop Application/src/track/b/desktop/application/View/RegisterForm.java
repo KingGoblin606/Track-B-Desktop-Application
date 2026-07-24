@@ -14,10 +14,11 @@ public class RegisterForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-                FocusAdapter fa;
+        //focus listener to set current focus item as the default
+        FocusAdapter fa;
         fa = new FocusAdapter() {
             @Override
-            public void focusGained(FocusEvent e) {
+            public void focusGained(FocusEvent e) {//allows Enter to be used to activate button
                 JButton button = (JButton) e.getSource();
                 getRootPane().setDefaultButton(button);
             }
