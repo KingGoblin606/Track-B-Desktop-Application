@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class DBInitializer {
     
-    public static void initialize () {
+    public static void initialize () {//calls methods to create tables if they don't exist
         try (DBConnection db = new DBConnection()) {
             Connection conn = db.getConnection();
             
@@ -18,7 +18,7 @@ public class DBInitializer {
             createStockIssuance(conn);
             
             
-        } catch (SQLException e) {
+        } catch (SQLException e) {//prevents creation of tables that already exist
             if(!"X0Y32".equals(e.getSQLState())) {
                 e.printStackTrace();
             }
