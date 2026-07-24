@@ -26,96 +26,96 @@ public class DBInitializer {
     }
     
     private static void createUserTable(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE Users (
-                           UserID INT PRIMARY KEY,
-                           UserName VARCHAR(50) NOT NULL,
-                           UserPassword VARCHAR(255) NOT NULL,
-                           UserEmail VARCHAR(100) NOT NULL UNIQUE,
-                           UserRole VARCHAR(10) NOT NULL
-                           CHECK (UserRole IN ('User', 'Admin'))
-                           )
-                           """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE Users (
+                                           UserID INT PRIMARY KEY,
+                                           UserName VARCHAR(50) NOT NULL,
+                                           UserPassword VARCHAR(255) NOT NULL,
+                                           UserEmail VARCHAR(100) NOT NULL UNIQUE,
+                                           UserRole VARCHAR(10) NOT NULL
+                                           CHECK (UserRole IN ('User', 'Admin'))
+                                           )
+                                           """);
+        }
     }
     
     private static void createSuppliersTable(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE Supplier (
-                           SupplierID int PRIMARY KEY,
-                           SupplierName VARCHAR(50) NOT NULL,
-                           ContactPerson VARCHAR(50) NOT NULL,
-                           SupplierPhoneNumber VARCHAR(20) NOT NULL,
-                           SupplierEmail VARCHAR(100) NOT NULL UNIQUE,
-                           StreetAddress VARCHAR(100) NOT NULL,
-                           City VARCHAR(50) NOT NULL,
-                           PostalCode VARCHAR(10) NOT NULL
-                           )
-                           """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE Supplier (
+                                           SupplierID int PRIMARY KEY,
+                                           SupplierName VARCHAR(50) NOT NULL,
+                                           ContactPerson VARCHAR(50) NOT NULL,
+                                           SupplierPhoneNumber VARCHAR(20) NOT NULL,
+                                           SupplierEmail VARCHAR(100) NOT NULL UNIQUE,
+                                           StreetAddress VARCHAR(100) NOT NULL,
+                                           City VARCHAR(50) NOT NULL,
+                                           PostalCode VARCHAR(10) NOT NULL
+                                           )
+                                           """);
+        }
     }
     
     private static void createMaterialTable(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE Materials (
-                           MaterialsID INT PRIMARY KEY,
-                           SupplierID INT NOT NULL,
-                           MaterialName VARCHAR(50) NOT NULL,
-                           Quantity INT NOT NULL,
-                           ReorderLevel INT NOT NULL,
-                           Cost INT NOT NULL,
-                           Category VARCHAR(50) NOT NULL,
-                           FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
-                           )
-                           """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE Materials (
+                                           MaterialsID INT PRIMARY KEY,
+                                           SupplierID INT NOT NULL,
+                                           MaterialName VARCHAR(50) NOT NULL,
+                                           Quantity INT NOT NULL,
+                                           ReorderLevel INT NOT NULL,
+                                           Cost INT NOT NULL,
+                                           Category VARCHAR(50) NOT NULL,
+                                           FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+                                           )
+                                           """);
+        }
     }
     
     private static void createDepartmentTable(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE Department (
-                           DepartmentID INT PRIMARY KEY,
-                           DepartmentName VARCHAR(50)
-                           )
-                           """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE Department (
+                                           DepartmentID INT PRIMARY KEY,
+                                           DepartmentName VARCHAR(50)
+                                           )
+                                           """);
+        }
     }
     
     private static void createCleanerTable(Connection conn) throws SQLException {
-    Statement stmt = conn.createStatement();
-
-    stmt.executeUpdate("""
-                       CREATE TABLE Cleaner (
-                       CleanerID INT PRIMARY KEY,
-                       CleanerName VARCHAR(50) NOT NULL,
-                       CleanerSurname VARCHAR(50) NOT NULL,
-                       CleanerPhoneNumber VARCHAR(20) NOT NULL,
-                       CleanerEmail VARCHAR(100) NOT NULL UNIQUE,
-                       DepartmentID INT,
-                       FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
-                       )
-                       """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE Cleaner (
+                                           CleanerID INT PRIMARY KEY,
+                                           CleanerName VARCHAR(50) NOT NULL,
+                                           CleanerSurname VARCHAR(50) NOT NULL,
+                                           CleanerPhoneNumber VARCHAR(20) NOT NULL,
+                                           CleanerEmail VARCHAR(100) NOT NULL UNIQUE,
+                                           DepartmentID INT,
+                                           FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+                                           )
+                                           """);
+        }
     }
     
     private static void createStockIssuance(Connection conn) throws SQLException {
-        Statement stmt = conn.createStatement();
-        
-        stmt.executeUpdate("""
-                           CREATE TABLE StockIssuance (
-                           IssueID INT PRIMARY KEY,
-                           MaterialsID INT NOT NULL,
-                           CleanerID INT NOT NULL,
-                           UserID INT NOT NULL,
-                           Quantity INT NOT NULL,
-                           DateIssued DATE,                           
-                           FOREIGN KEY (MaterialsID) REFERENCES Materials(MaterialsID),
-                           FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID),
-                           FOREIGN KEY (UserID) REFERENCES Users(UserID)
-                           )
-                           """);
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("""
+                                           CREATE TABLE StockIssuance (
+                                           IssueID INT PRIMARY KEY,
+                                           MaterialsID INT NOT NULL,
+                                           CleanerID INT NOT NULL,
+                                           UserID INT NOT NULL,
+                                           Quantity INT NOT NULL,
+                                           DateIssued DATE,
+                                           FOREIGN KEY (MaterialsID) REFERENCES Materials(MaterialsID),
+                                           FOREIGN KEY (CleanerID) REFERENCES Cleaner(CleanerID),
+                                           FOREIGN KEY (UserID) REFERENCES Users(UserID)
+                                           )
+                                           """);
+        }
     }
 }
